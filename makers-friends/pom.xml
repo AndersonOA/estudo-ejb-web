@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.makersweb</groupId>
+	<artifactId>makers-friends</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>Rede Social Makers Friends</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.compiler.version>1.8</java.compiler.version>
+		<maven.compiler.version>3.6.1</maven.compiler.version>
+
+		<!-- jUnit -->
+		<junit.version>4.12</junit.version>
+
+		<!-- GlassFish -->
+		<glassfish.glassfishDirectory>/Users/andersonaristides/Documents/glassfish4</glassfish.glassfishDirectory>
+		<glassfish.user>admin</glassfish.user>
+		<glassfish.adminPassword>salmos89</glassfish.adminPassword>
+		<glassfish.domain.name>domain1</glassfish.domain.name>
+		<glassfish.domain.host>localhost</glassfish.domain.host>
+		<glassfish.domain.adminPort>4848</glassfish.domain.adminPort>
+	</properties>
+
+	<developers>
+		<developer>
+			<id>makersweb</id>
+			<name>Anderson O. Aristides</name>
+			<email>contato@makersweb.com.br</email>
+			<organization>Makersweb</organization>
+			<organizationUrl>http://www.makersweb.com.br</organizationUrl>
+			<roles>
+				<role>owner</role>
+				<role>developer</role>
+			</roles>
+			<timezone>-3</timezone>
+		</developer>
+	</developers>
+
+	<dependencies>
+		<!-- Métodos uteis para manipulação de String, métodos e etc -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
+		<!-- PROVIDER JPA(HIBERNATE) -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.0.Final</version>
+		</dependency>
+
+		<!-- DEPENDENCIA MYSQL -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.37</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>makers-friends</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<source>${java.compiler.version}</source>
+					<target>${java.compiler.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.glassfish.maven.plugin</groupId>
+				<artifactId>maven-glassfish-plugin</artifactId>
+				<configuration>
+					<terse>false</terse>
+					<echo>true</echo>
+					<debug>true</debug>
+					<glassfishDirectory>${glassfish.glassfishDirectory}</glassfishDirectory>
+					<domainDirectory>${glassfish.glassfishDirectory}/glassfish/domains/</domainDirectory>
+					<user>${glassfish.user}</user>
+					<adminPassword>${glassfish.adminPassword}</adminPassword>
+					<domain>
+						<name>${glassfish.domain.name}</name>
+						<host>${glassfish.domain.host}</host>
+						<adminPort>${glassfish.domain.adminPort}</adminPort>
+					</domain>
+					<components>
+						<component>
+							<name>${project.artifactId}</name>
+							<artifact>${project.build.directory}/${project.build.finalName}.war</artifact>
+						</component>
+					</components>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+</project>
